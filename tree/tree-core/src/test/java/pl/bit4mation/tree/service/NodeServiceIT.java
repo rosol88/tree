@@ -46,10 +46,10 @@ public class NodeServiceIT
         root.setValue( 1 );
         nodeService.saveNode( root );
 
-        Node child1 = new Node();
-        child1.setValue( 2 );
-        child1.setParent( root );
-        nodeService.saveNode( child1 );
+        Node child = new Node();
+        child.setValue( 2 );
+        child.setParent( root );
+        nodeService.saveNode( child );
 
         List<Node> children = nodeService.findByParentId( root.getId() );
 
@@ -68,6 +68,32 @@ public class NodeServiceIT
         nodeService.saveNode( node );
         node = nodeService.get( node.getId() );
         assertEquals( node.getValue(), 5 );
+    }
+
+    @Test
+    public void changeParent()
+    {
+        Node root1 = new Node();
+        root1.setValue( 1 );
+        nodeService.saveNode( root1 );
+
+        Node root2 = new Node();
+        root2.setValue( 2 );
+        nodeService.saveNode( root2 );
+
+        Node child = new Node();
+        child.setValue( 3 );
+        child.setParent( root1 );
+        nodeService.saveNode( child );
+
+        child = nodeService.get( child.getId() );
+        assertEquals( child.getParent().getId(), root1.getId() );
+
+        child.setParent( root2 );
+        nodeService.saveNode( child );
+
+        assertEquals( child.getParent().getId(), root2.getId() );
+
     }
 
     @Test
