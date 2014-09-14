@@ -8,7 +8,7 @@ This is a web application that allows to manage tree structure.
 
 List of functions
 ----
-- diplay tree strucutre
+- display tree structure
 - adding, changing, moving, copying nodes and leafs
 - calculates sum of nodes values and save the sum in leafs
 
@@ -18,7 +18,7 @@ Applications provieds two modes of saving:
 - autosave - all modifications are immidietly save in database
 - non-autosave - modifications are saved only after press Save button
  
-User guid
+User guide
 ----
 Start screen:
 <br>
