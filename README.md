@@ -18,7 +18,7 @@ Applications provieds two modes of saving:
 - autosave - all modifications are immidietly save in database
 - non-autosave - modifications are saved only after press Save button
  
-User guid
+User guide
 ----
 Start screen:
 <br>
