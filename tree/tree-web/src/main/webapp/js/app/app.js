@@ -1,4 +1,3 @@
-var canStartTest=false;//do testów
 Ext.Loader.setConfig({
 	enabled : false
 });
@@ -7,7 +6,6 @@ Ext.application({
 	controllers:['TreeController'],
 	models:['Node'],
     appFolder: 'app',
-
     launch: function() {
        Ext.create('Ext.container.Viewport', {
             layout: 'fit',
@@ -24,6 +22,5 @@ Ext.application({
                 }
             ]
         });
-       canStartTest=true;
     }
 });

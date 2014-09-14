@@ -7,21 +7,25 @@ Ext.define('Tree.service.TreeService', {
     },
     addNode:function(tree){
     	var node=this.getSelectedNode(tree);
-		var child=node.appendChild({
-			value:0
-		});
-		node.expand();
-		this.mode.save(this,child);
+    	var me=this;
+    	node.expand(false,function(){
+    		var child=node.appendChild({
+    			value:0
+    		});
+    		me.mode.save(me,child);
+    	});
     },
     addLeaf:function(tree){
     	var node=this.getSelectedNode(tree);
     	var sum=this.sumParentNodes(node);
-		var child=node.appendChild({
-			value:sum,
-			leaf:true
+		var me=this;
+		node.expand(false,function(){
+			var child=node.appendChild({
+				value:sum,
+				leaf:true
+			});
+			me.mode.save(me,child);
 		});
-		node.expand();
-		this.mode.save(this,child);
     },
     deleteNodes:function(tree){
     	var selectedNodes=tree.getSelectionModel().getSelection();
@@ -41,9 +45,7 @@ Ext.define('Tree.service.TreeService', {
     recalculateChildren:function(node,sum){
     	var me=this;
     	if(!node.isLoaded()){
-    		console.log('load');
     		node.expand(false,function(){
-    			console.log('afterexp');
     			me._recalculateChildren(node,sum);
     		});
     	}else{
@@ -141,14 +143,11 @@ Ext.define('Tree.service.TreeService', {
     	this.recalculateNode(parent);
     },
     copy:function(node,tree){
-    	if(!node.isLoaded()){
-    		tree.getStore().load({node:node});
-    	}
     	this.storage=node.copy();
     },
     paste:function(node){
     	node.appendChild(this.storage);
     	this.storage=null;
-    	this.mode.save(this,node);
+    	this.recalculateNode(node);
     }
 });

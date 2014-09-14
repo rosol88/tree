@@ -41,14 +41,6 @@ public interface NodeService
      * Save or update node
      * 
      * @param node Node object
-     * @param parentId Id of parent node
-     */
-    // void saveNode( Node node, Long parentId );
-
-    /**
-     * Save or update node
-     * 
-     * @param node Node object
      */
     void saveNode( Node node );
 

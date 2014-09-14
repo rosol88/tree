@@ -91,6 +91,5 @@ Ext.define('Tree.controller.TreeController', {
     	else if(e.ctrlKey && e.getCharCode()==Ext.EventObject.V){
     		this.treeService.paste(record,this.getTree());
     	}
-    	
     }
 });

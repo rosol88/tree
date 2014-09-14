@@ -60,17 +60,6 @@ public class NodeServiceImpl
 
     }
 
-    // @Override
-    // public void saveNode( Node node, Long parentId )
-    // {
-    // if ( parentId != null )
-    // {
-    // Node parent = repo.findOne( parentId );
-    // node.setParent( parent );
-    // }
-    // repo.save( node );
-    // }
-
     @Override
     public void saveNode( Node node )
     {

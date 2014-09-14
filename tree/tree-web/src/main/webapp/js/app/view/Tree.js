@@ -16,8 +16,7 @@ Ext.define('Tree.view.Tree', {
         dataIndex: 'value',
         editor: {
             xtype: 'numberfield',
-            allowBlank: false,
-            allowOnlyWhitespace: false
+            allowBlank: false
         }
     }],
     tbar:[
@@ -53,15 +52,5 @@ Ext.define('Tree.view.Tree', {
         	  action:'reload'
           }
     ],
-    store: new Ext.data.TreeStore({
-    	model:'Tree.model.Node',
-    	proxy: {
-            type: 'rest',
-            url : 'rest/nodes'
-        },
-        root: {
-            id: 'root',
-            expanded: true
-        }
-    })
+    store: Ext.create('Tree.store.TreeStore')
 });
