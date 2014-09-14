@@ -15,7 +15,7 @@ import pl.bit4mation.tree.cfg.AppConfig;
 import pl.bit4mation.tree.model.Node;
 
 @ContextConfiguration( classes = AppConfig.class )
-public class NodeServiceIT
+public class NodeServiceTest
     extends AbstractTestNGSpringContextTests
 {
 
@@ -67,7 +67,7 @@ public class NodeServiceIT
         node.setValue( 5 );
         nodeService.saveNode( node );
         node = nodeService.get( node.getId() );
-        assertEquals( node.getValue(), 5 );
+        assertEquals( node.getValue(), 5, "Invalid new value" );
     }
 
     @Test
@@ -87,13 +87,12 @@ public class NodeServiceIT
         nodeService.saveNode( child );
 
         child = nodeService.get( child.getId() );
-        assertEquals( child.getParent().getId(), root1.getId() );
+        assertEquals( child.getParent().getId(), root1.getId(), "Invalid parent id" );
 
         child.setParent( root2 );
         nodeService.saveNode( child );
 
-        assertEquals( child.getParent().getId(), root2.getId() );
-
+        assertEquals( child.getParent().getId(), root2.getId(), "Invalid parent id" );
     }
 
     @Test
