@@ -45,10 +45,14 @@ To change value of node or leaf just double click on it and write new value:
 When node value is changed, values of children leafs will recalculated.
 When leaf value is changed, value of first parent will recalculated.
 
-To move node or leaf to another node drag element to another node and drop
+To move element just drag and drop it in new location.
+<br>
+![](https://github.com/rosol88/tree/blob/master/img/move-node.png)
 
 To copy node or leaf select element and press CTRL+C and then select another node and press CTRL+V
 
 To change saving mode click 'Autosave'. If 'Autosave' button is toggled autosave mode is turn on. If autosave node is turn off and you want to save changes click 'Save' button.
-
+To move element just drag and drop it in new location.
+<br>
+![](https://github.com/rosol88/tree/blob/master/img/autosave.png)
 To reload tree click 'Reload' button
