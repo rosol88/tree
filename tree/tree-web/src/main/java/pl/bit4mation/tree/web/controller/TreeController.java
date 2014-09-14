@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.bit4mation.tree.model.Node;
-import pl.bit4mation.tree.repo.NodeRepo;
 import pl.bit4mation.tree.service.NodeService;
 
 @Controller
@@ -24,14 +23,11 @@ public class TreeController
     @Autowired
     private NodeService ns;
 
-    @Autowired
-    private NodeRepo repo;
-
     @RequestMapping( value = { "/nodes/{parentId}" }, method = RequestMethod.GET )
     @ResponseBody
     public List<Node> getNodes( @PathVariable Long parentId )
     {
-        List<Node> nodes = repo.findByParentId( parentId );
+        List<Node> nodes = ns.findByParentId( parentId );
         return nodes;
 
     }
@@ -44,13 +40,6 @@ public class TreeController
         return nodes;
 
     }
-
-    // @RequestMapping( value = { "/node" }, method = RequestMethod.POST )
-    // @ResponseBody
-    // public void save( @RequestBody List<Node> nodes )
-    // {
-    // ns.save( nodes, null );
-    // }
 
     @RequestMapping( value = { "/nodes/{nodeId}" }, method = RequestMethod.DELETE )
     @ResponseBody

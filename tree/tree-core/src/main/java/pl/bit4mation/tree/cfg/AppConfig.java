@@ -18,12 +18,22 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Configuration class
+ * 
+ * @author Paweł Rosolak
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories( "pl.bit4mation.tree.repo" )
 @ComponentScan( "pl.bit4mation.tree" )
 public class AppConfig
 {
+    /**
+     * Configure entity manager factory
+     * 
+     * @return entity manager factory
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory()
     {
@@ -57,15 +67,12 @@ public class AppConfig
         return dataSource;
     }
 
-    Properties hibernateProperties()
-    {
-        Properties props = new Properties();
-        props.setProperty( "hibernate.hbm2ddl.auto", "update" );
-        props.setProperty( "hibernate.show_sql", "true" );
-        props.setProperty( "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect" );
-        return props;
-    }
-
+    /**
+     * Configure transaction manager
+     * 
+     * @param emf entity manager factory
+     * @return transaction manager
+     */
     @Bean
     public PlatformTransactionManager transactionManager( EntityManagerFactory emf )
     {
@@ -74,12 +81,22 @@ public class AppConfig
         return transactionManager;
     }
 
+    /**
+     * Create class for exception translation
+     * 
+     * @return exception translator
+     */
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation()
     {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
+    /**
+     * Hibernate properties definition
+     * 
+     * @return hibernate properties
+     */
     Properties additionalProperties()
     {
         Properties properties = new Properties();

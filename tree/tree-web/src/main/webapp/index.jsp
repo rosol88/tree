@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Hello Ext</title>
+    <title>Tree structure management</title>
 
     <link rel="stylesheet" type="text/css" href="js/lib/extjs/resources/css/ext-all-gray.css">
     <script type="text/javascript" src="js/lib/extjs/ext-all-dev.js"></script>

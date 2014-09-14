@@ -13,5 +13,7 @@ Ext.define('Tree.service.LocalMode', {
 			service.deleteNode(this.toDelete[i]);
 		}
 		this.toDelete=[];
+	},
+	updateNode:function(service,node){
 	}
 });

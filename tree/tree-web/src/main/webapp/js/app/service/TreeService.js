@@ -39,6 +39,18 @@ Ext.define('Tree.service.TreeService', {
     	}
     },
     recalculateChildren:function(node,sum){
+    	var me=this;
+    	if(!node.isLoaded()){
+    		console.log('load');
+    		node.expand(false,function(){
+    			console.log('afterexp');
+    			me._recalculateChildren(node,sum);
+    		});
+    	}else{
+    		me._recalculateChildren(node,sum);
+    	}
+    },
+    _recalculateChildren:function(node,sum){
     	for(var i=0;i<node.childNodes.length;i++){
     		var child=node.childNodes[i];
     		if(child.isLeaf()){
@@ -93,19 +105,19 @@ Ext.define('Tree.service.TreeService', {
     		}
     	});
     },
+    moveNode:function(node,parent,oldParent){
+    	var parent=node.parentNode;
+    	var oldParent=node.oldParent;
+    	this.recalculateNode(parent);
+    	this.recalculateNode(oldParent);
+    	this.mode.updateNode(node);
+    	node.oldParent=null;
+    },
     updateNode:function(node){
 		Ext.Ajax.request({
     		url:'rest/nodes',
     		method:'POST',
     		jsonData:node.getObject(true)
-    	});
-    },
-    save:function(data){
-    	console.log(data);
-    	Ext.Ajax.request({
-    		url:'rest/node',
-    		method:'POST',
-    		jsonData:data
     	});
     },
     deleteNode:function(nodeId){

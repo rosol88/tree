@@ -8,5 +8,8 @@ Ext.define('Tree.service.RemoteMode', {
 	},
 	sync:function(){
 		
+	},
+	updateNode:function(service,node){
+		service.updateNode(node);
 	}
 });

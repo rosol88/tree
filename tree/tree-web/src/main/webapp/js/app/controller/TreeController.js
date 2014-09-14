@@ -36,6 +36,7 @@ Ext.define('Tree.controller.TreeController', {
             },
             'tree dataview':{
             	itemkeydown:this.keyPress,
+            	beforedrop:this.beforeNodeDrop,
             	drop:this.nodeDrop
             }
         });
@@ -52,19 +53,23 @@ Ext.define('Tree.controller.TreeController', {
     },
     nodeEdit:function(editor,e,opts){
     	var node=e.record;
-    	console.log(node.isLeaf());
     	if(node.isLeaf())
     		this.treeService.recalculateLeaf(node,e.originalValue);
     	else
     		this.treeService.recalculateNode(node);
     },
+    beforeNodeDrop:function(el,data){
+    	var parent=data.records[0].parentNode;
+    	data.records[0].oldParent=parent;
+    },
     nodeDrop:function(el,data){
-    	this.treeService.updateNode(data.records[0]);
+    	this.treeService.moveNode(data.records[0]);
     },
     save:function(){
     	this.treeService.saveTree(this.getTree());
     },
     reload:function(){
+    	this.getTree().getSelectionModel().deselectAll();
     	this.getTree().getRootNode().removeAll();
     	this.getTree().getStore().load();
     },

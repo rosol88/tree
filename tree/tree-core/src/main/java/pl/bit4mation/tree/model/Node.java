@@ -11,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
+/**
+ * Entity for Nodes and leaf
+ * 
+ * @author Paweł Rosolak
+ */
 @Entity
 @SequenceGenerator( name = "id_gen", sequenceName = "node_seq" )
 public class Node
@@ -24,68 +28,14 @@ public class Node
 
     private int value;
 
-    private boolean leaf = false;
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId( Long id )
-    {
-        this.id = id;
-    }
+    private boolean leaf;
 
     @OneToMany( mappedBy = "parent" )
     private Set<Node> children;
 
-    @Transient
-    private int sum;
-
     @ManyToOne( cascade = CascadeType.PERSIST )
     @JoinColumn( name = "parent" )
     private Node parent;
-
-    //
-    public int getValue()
-    {
-        return value;
-    }
-
-    public void setValue( int value )
-    {
-        this.value = value;
-    }
-
-    public int getSum()
-    {
-        return sum;
-    }
-
-    public void setSum( int sum )
-    {
-        this.sum = sum;
-    }
-
-    public Node getParent()
-    {
-        return parent;
-    }
-
-    public void setParent( Node parent )
-    {
-        this.parent = parent;
-    }
-
-    public Set<Node> getChildren()
-    {
-        return children;
-    }
-
-    public void setChildren( Set<Node> children )
-    {
-        this.children = children;
-    }
 
     @Override
     public String toString()
@@ -93,14 +43,84 @@ public class Node
         return "Node [id=" + id + ", value=" + value + ", leaf=" + leaf + ", parent=" + parent + "]";
     }
 
-    public boolean isLeaf()
+    /**
+     * @return the id from database
+     */
+    public Long getId()
     {
-        return this.leaf;
+        return id;
     }
 
+    /**
+     * @param id the id to set
+     */
+    public void setId( Long id )
+    {
+        this.id = id;
+    }
+
+    /**
+     * @return the value of node
+     */
+    public int getValue()
+    {
+        return value;
+    }
+
+    /**
+     * @param value the value to set
+     */
+    public void setValue( int value )
+    {
+        this.value = value;
+    }
+
+    /**
+     * @return true if element is leaf
+     */
+    public boolean isLeaf()
+    {
+        return leaf;
+    }
+
+    /**
+     * @param leaf the leaf to set
+     */
     public void setLeaf( boolean leaf )
     {
         this.leaf = leaf;
+    }
+
+    /**
+     * @return the children
+     */
+    public Set<Node> getChildren()
+    {
+        return children;
+    }
+
+    /**
+     * @param children the children to set
+     */
+    public void setChildren( Set<Node> children )
+    {
+        this.children = children;
+    }
+
+    /**
+     * @return the parent
+     */
+    public Node getParent()
+    {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent( Node parent )
+    {
+        this.parent = parent;
     }
 
 }

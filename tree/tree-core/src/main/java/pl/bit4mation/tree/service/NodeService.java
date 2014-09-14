@@ -1,25 +1,55 @@
 package pl.bit4mation.tree.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import pl.bit4mation.tree.model.Node;
 
+/**
+ * Provides methods for nodes operations
+ * 
+ * @author Paweł Rosolak
+ */
 public interface NodeService
 {
-
+    /**
+     * @return List of root nodes
+     */
     List<Node> getRootNodes();
 
-    Node createNode( Node node );
+    /**
+     * Search childern of node
+     * 
+     * @param parentId Parent node id
+     * @return list of children
+     */
+    List<Node> findByParentId( Long parentId );
 
+    /**
+     * Get node by id
+     * 
+     * @param id Node id
+     * @return Node object
+     */
     Node get( Long id );
 
+    /**
+     * Deletes all nodes
+     */
     void clean();
 
-    void save( Collection<Node> nodes, Node parent );
-
+    /**
+     * Save or update node
+     * 
+     * @param node Node object
+     * @param parentId Id of parent node
+     */
     void save( Node node, Long parentId );
 
+    /**
+     * Delete node by id
+     * 
+     * @param nodeId Node id
+     */
     void delete( Long nodeId );
 
 }

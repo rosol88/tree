@@ -15,6 +15,7 @@ Ext.application({
                 {
                     xtype: 'panel',
                     title: 'Tree',
+                    layout: 'fit',
                     items:[
 						{
 							xtype:'tree'
