@@ -2,6 +2,11 @@ package pl.bit4mation.tree.web.cfg;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * Configure dispatcher servlet
+ * 
+ * @author Paweł Rosolak
+ */
 public class SpringMvcInitializer
     extends AbstractAnnotationConfigDispatcherServletInitializer
 {

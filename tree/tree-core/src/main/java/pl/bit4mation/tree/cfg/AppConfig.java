@@ -5,12 +5,13 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -48,22 +49,10 @@ public class AppConfig
         return em;
     }
 
-    // @Bean
-    // public DataSource dataSource()
-    // {
-    // DataSource dataSource = new EmbeddedDatabaseBuilder().setType( EmbeddedDatabaseType.HSQL ).setName( "tree"
-    // ).build();
-    // return dataSource;
-    // }
-
     @Bean
     public DataSource dataSource()
     {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName( "org.postgresql.Driver" );
-        dataSource.setUrl( "jdbc:postgresql://localhost:5432/plusproject" );
-        dataSource.setUsername( "postgres" );
-        dataSource.setPassword( "postgres" );
+        DataSource dataSource = new EmbeddedDatabaseBuilder().setType( EmbeddedDatabaseType.HSQL ).setName( "tree" ).build();
         return dataSource;
     }
 
@@ -101,8 +90,7 @@ public class AppConfig
     {
         Properties properties = new Properties();
         properties.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
-        // properties.setProperty( "hibernate.dialect", "org.hibernate.dialect.HSQLDialect" );
-        properties.setProperty( "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect" );
+        properties.setProperty( "hibernate.dialect", "org.hibernate.dialect.HSQLDialect" );
         return properties;
     }
 }

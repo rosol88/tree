@@ -3,6 +3,9 @@ package pl.bit4mation.tree.service.impl;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class NodeServiceImpl
 
     @Autowired
     private NodeRepo repo;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Node> getRootNodes()
@@ -54,12 +60,23 @@ public class NodeServiceImpl
 
     }
 
+    // @Override
+    // public void saveNode( Node node, Long parentId )
+    // {
+    // if ( parentId != null )
+    // {
+    // Node parent = repo.findOne( parentId );
+    // node.setParent( parent );
+    // }
+    // repo.save( node );
+    // }
+
     @Override
-    public void save( Node node, Long parentId )
+    public void saveNode( Node node )
     {
-        if ( parentId != null )
+        if ( node.getParent() != null && !em.contains( node.getParent() ) )
         {
-            Node parent = repo.findOne( parentId );
+            Node parent = repo.findOne( node.getParent().getId() );
             node.setParent( parent );
         }
         repo.save( node );

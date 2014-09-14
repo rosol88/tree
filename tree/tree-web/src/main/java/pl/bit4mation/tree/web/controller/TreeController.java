@@ -2,8 +2,6 @@ package pl.bit4mation.tree.web.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,23 +13,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.bit4mation.tree.model.Node;
 import pl.bit4mation.tree.service.NodeService;
 
+/**
+ * Rest controller for nodes
+ * 
+ * @author Paweł Rosolak
+ */
 @Controller
 public class TreeController
 {
-    private static Logger log = LoggerFactory.getLogger( TreeController.class );
 
     @Autowired
     private NodeService ns;
 
+    /**
+     * @param parentId Parent node id
+     * @return List of children
+     */
     @RequestMapping( value = { "/nodes/{parentId}" }, method = RequestMethod.GET )
     @ResponseBody
     public List<Node> getNodes( @PathVariable Long parentId )
     {
         List<Node> nodes = ns.findByParentId( parentId );
         return nodes;
-
     }
 
+    /**
+     * @return List of root nodes
+     */
     @RequestMapping( value = { "/nodes/root" }, method = RequestMethod.GET )
     @ResponseBody
     public List<Node> getRootNodes()
@@ -41,6 +49,11 @@ public class TreeController
 
     }
 
+    /**
+     * Delete node by id
+     * 
+     * @param nodeId Node id
+     */
     @RequestMapping( value = { "/nodes/{nodeId}" }, method = RequestMethod.DELETE )
     @ResponseBody
     public void deleteNode( @PathVariable Long nodeId )
@@ -48,15 +61,17 @@ public class TreeController
         ns.delete( nodeId );
     }
 
+    /**
+     * Save or update node
+     * 
+     * @param node Node object
+     * @return Node id
+     */
     @RequestMapping( value = { "/nodes" }, method = RequestMethod.POST )
     @ResponseBody
     public Long save( @RequestBody Node node )
     {
-        log.debug( "Node: {}", node );
-        Long parentId = null;
-        if ( node.getParent() != null )
-            parentId = node.getParent().getId();
-        ns.save( node, parentId );
+        ns.saveNode( node );
         return node.getId();
     }
 

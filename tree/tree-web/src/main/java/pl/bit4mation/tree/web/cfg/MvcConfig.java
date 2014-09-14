@@ -10,11 +10,14 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import pl.bit4mation.tree.cfg.AppConfig;
 
+/**
+ * Configure web app
+ * 
+ * @author Paweł Rosolak
+ */
 @EnableWebMvc
 @Configuration
 @ComponentScan( { "pl.bit4mation.tree.web.*" } )
@@ -22,16 +25,6 @@ import pl.bit4mation.tree.cfg.AppConfig;
 public class MvcConfig
     extends WebMvcConfigurerAdapter
 {
-    @Bean
-    public InternalResourceViewResolver viewResolver()
-    {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass( JstlView.class );
-        viewResolver.setPrefix( "/WEB-INF/pages/" );
-        viewResolver.setSuffix( ".jsp" );
-        return viewResolver;
-    }
-
     @Override
     public void configureMessageConverters( List<HttpMessageConverter<?>> converters )
     {
@@ -39,6 +32,11 @@ public class MvcConfig
         super.configureMessageConverters( converters );
     }
 
+    /**
+     * Converter which allows to serialize hibernate object with proxied fields
+     * 
+     * @return JSON converter
+     */
     @Bean
     public MappingJackson2HttpMessageConverter converter()
     {
