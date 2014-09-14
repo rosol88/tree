@@ -52,7 +52,9 @@ To move element just drag and drop it in new location.
 To copy node or leaf select element and press CTRL+C and then select another node and press CTRL+V
 
 To change saving mode click 'Autosave'. If 'Autosave' button is toggled autosave mode is turn on. If autosave node is turn off and you want to save changes click 'Save' button.
-To move element just drag and drop it in new location.
 <br>
 ![](https://github.com/rosol88/tree/blob/master/img/autosave.png)
+
+To move element just drag and drop it in new location.
+
 To reload tree click 'Reload' button
